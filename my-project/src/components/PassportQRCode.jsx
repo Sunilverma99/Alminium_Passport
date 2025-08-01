@@ -3,8 +3,6 @@
 import React, { useEffect, useRef } from 'react'
 import QRCodeStyling from 'qr-code-styling'
 
-
-
 const PassportQRCode = ({ url, size = 160 }) => {
   const qrCodeRef = useRef(null)
   const qrCode = useRef(null)

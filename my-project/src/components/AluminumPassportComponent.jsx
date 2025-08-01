@@ -1,14 +1,10 @@
+"use client"
+
 import { useState, useEffect } from "react"
-import PassportQRCode from "./PassportQRCode.jsx"
-import PieChartJs from "./PieChartJs.jsx"
-import DonutChart from "./DonutCharJs.jsx"
-import { GiHealthCapsule } from "react-icons/gi"
-import InformationBar from "./InformationBar.jsx"
-import { Leaf, Factory, Package, Truck } from "lucide-react"
+import PassportQRCode from "./PassportQRCode"
 
 export default function AluminumPassportComponent({ tokenId: externalTokenId }) {
-  const initialTokenId = externalTokenId || 'AL-001'
-
+  const initialTokenId = externalTokenId || "AL-001"
   const [tokenId, setTokenId] = useState(initialTokenId)
   const [version, setVersion] = useState(0)
   const [aluminumData, setAluminumData] = useState(null)
@@ -20,146 +16,142 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
   const [error, setError] = useState("")
   const [organizationData, setOrganizationData] = useState(null)
 
-  // Dummy aluminum data
+  // Simple aluminum data
   const dummyAluminumData = {
     passportId: "AL-PASSPORT-2024-001",
-    model: "Aluminum Alloy 6061-T6",
     serialNumber: "AL-SN-2024-001",
-    category: "Industrial Aluminum",
-    weight: 2500, // kg
+    qrCodeUrl: "https://example.com/qr/AL-PASSPORT-2024-001",
     status: "Active",
-    manufacturedDate: "2024-01-15",
-    manufacturer: "AluminumCorp Industries",
-    economicOperator: "GreenMetal Solutions",
+    version: "1.2.0",
+    createdAt: "2024-01-15T10:00:00Z",
+    lastUpdated: "2025-07-30T15:30:00Z",
+    model: "Aluminum Alloy 6061-T6",
+    category: "Industrial Aluminum",
+    weight: 2500,
+    purity: 99.7,
+    dimensions: {
+      thickness: "12 mm",
+      width: "1000 mm",
+      length: "3000 mm"
+    },
+    materialProperties: {
+      tensileStrength: "310 MPa",
+      yieldStrength: "276 MPa",
+      elongation: "12%",
+      hardness: "95 HB",
+      density: "2.70 g/cm³",
+      meltingPoint: "650°C",
+      thermalConductivity: "167 W/m·K",
+      corrosionResistance: "Excellent"
+    },
     sustainabilityScore: 85,
-    purity: 99.7, // percentage
-    alloyComposition: "6061-T6",
-    tensileStrength: "310 MPa",
-    yieldStrength: "276 MPa",
-    elongation: "12%",
-    hardness: "95 HB",
-    density: "2.70 g/cm³",
-    meltingPoint: "650°C",
-    conductivity: "167 W/m·K",
-    corrosionResistance: "Excellent",
+    carbonFootprint: {
+      total: 4.3,
+      verifier: "DNV GL"
+    },
+    recycledContent: {
+      postConsumer: 30,
+      preConsumer: 20
+    },
     recyclability: "100%",
-    applications: ["Automotive", "Aerospace", "Construction", "Electronics"],
-    certifications: ["ISO 9001", "AS9100", "RoHS Compliant", "REACH Registered"],
+    waterUsage: "1.2 m³/tonne",
+    energySource: {
+      type: "Hydropower",
+      renewablePercentage: 95
+    },
+    esgCertificates: ["ISO 14001", "ASI Performance Standard", "IRMA"],
     supplyChain: {
-      bauxiteSource: "Australia",
-      smeltingLocation: "Canada",
-      processingFacility: "Germany",
-      finalAssembly: "USA"
-    }
-  }
-
-  // Dummy material composition data
-  const dummyMaterialComposition = [
-    {
-      material: "Aluminum (Al)",
-      mass: 2485,
-      percentage: 99.4,
-      component: "Primary Metal",
-      isCritical: false
+      finalAssembly: {
+        company: "GreenMetal Solutions",
+        location: "Detroit, USA"
+      }
     },
-    {
-      material: "Silicon (Si)",
-      mass: 8.5,
-      percentage: 0.34,
-      component: "Alloying Element",
-      isCritical: false
+    compliance: {
+      certifications: ["ISO 9001", "ISO 14001", "AS9100", "REACH", "RoHS"],
+      cbamReady: true,
+      digitalProductPassportReady: true
     },
-    {
-      material: "Magnesium (Mg)",
-      mass: 4.0,
-      percentage: 0.16,
-      component: "Alloying Element",
-      isCritical: false
+    applications: ["Automotive", "Aerospace", "Construction", "Electronics"],
+    lifecycle: {
+      estimatedServiceLife: "20 years",
+      maintenanceRequired: "Low",
+      expectedEndUse: "Vehicle Body Panels",
+      disassemblyInstructionsUrl: "https://example.com/disassembly-instructions"
     },
-    {
-      material: "Iron (Fe)",
-      mass: 2.0,
-      percentage: 0.08,
-      component: "Impurity",
-      isCritical: false
+    hashOnChain: "0x3d5d9aef71f487db84c11e2a3a24a981f53ba12b",
+    digitalSignature: {
+      signerDID: "did:org:aluminumcorp#signing-key-1",
+      signature: "0xa34d1083aeef1229387b981cbadf2a7a18e981f4f23b7d5912b32a98c3bd981f"
     },
-    {
-      material: "Copper (Cu)",
-      mass: 0.5,
-      percentage: 0.02,
-      component: "Alloying Element",
-      isCritical: false
-    }
-  ]
-
-  // Dummy carbon footprint data
-  const dummyCarbonFootprint = {
-    total: 8.2, // kgCO2e/kg
-    byStage: [
-      { name: "Bauxite Mining", value: 1.2 },
-      { name: "Alumina Refining", value: 2.8 },
-      { name: "Aluminum Smelting", value: 3.5 },
-      { name: "Fabrication", value: 0.4 },
-      { name: "Transportation", value: 0.3 }
+    ipfsCid: "QmW8kPiFKnX1YZX3xQbGhR2LVn6XgUz3RmFv6U5WrnL9sz",
+    notes: "Batch processed using updated low-temperature casting technique.",
+    userFeedback: [
+      {
+        customer: "Tesla Inc.",
+        feedback: "Great recyclability and very high conductivity.",
+        date: "2024-05-20"
+      }
     ]
   }
 
-  // Dummy recycled content data
-  const dummyRecycledContent = [
-    {
-      material: "Aluminum",
-      preConsumerShare: 25,
-      postConsumerShare: 35,
-      totalRecycledShare: 60
-    },
-    {
-      material: "Silicon",
-      preConsumerShare: 15,
-      postConsumerShare: 5,
-      totalRecycledShare: 20
-    },
-    {
-      material: "Magnesium",
-      preConsumerShare: 10,
-      postConsumerShare: 5,
-      totalRecycledShare: 15
-    },
-    {
-      material: "Other Alloys",
-      preConsumerShare: 8,
-      postConsumerShare: 2,
-      totalRecycledShare: 10
-    }
+  // Enhanced material composition data
+  const dummyMaterialComposition = [
+    { material: "Aluminum (Al)", mass: 2485, percentage: 99.4, component: "Primary Metal", isCritical: false },
+    { material: "Silicon (Si)", mass: 8.5, percentage: 0.34, component: "Alloying Element", isCritical: false },
+    { material: "Magnesium (Mg)", mass: 4.0, percentage: 0.16, component: "Alloying Element", isCritical: false },
+    { material: "Iron (Fe)", mass: 2.0, percentage: 0.08, component: "Impurity", isCritical: false },
+    { material: "Copper (Cu)", mass: 0.5, percentage: 0.02, component: "Alloying Element", isCritical: false },
   ]
 
-  // Dummy organization data
+  // Enhanced carbon footprint data
+  const dummyCarbonFootprint = {
+    total: 4.3,
+    scope1: 1.5,
+    scope2: 2.8,
+    byStage: [
+      { name: "Bauxite Mining", value: 0.8, scope: "Scope 1" },
+      { name: "Alumina Refining", value: 1.8, scope: "Scope 1" },
+      { name: "Aluminum Smelting", value: 1.2, scope: "Scope 2" },
+      { name: "Casting & Fabrication", value: 0.3, scope: "Scope 1" },
+      { name: "Transportation", value: 0.2, scope: "Scope 1" },
+    ],
+  }
+
+  // Enhanced recycled content data
+  const dummyRecycledContent = [
+    { material: "Aluminum", preConsumerShare: 20, postConsumerShare: 30, totalRecycledShare: 50 },
+    { material: "Silicon", preConsumerShare: 15, postConsumerShare: 5, totalRecycledShare: 20 },
+    { material: "Magnesium", preConsumerShare: 10, postConsumerShare: 5, totalRecycledShare: 15 },
+    { material: "Other Alloys", preConsumerShare: 8, postConsumerShare: 2, totalRecycledShare: 10 },
+  ]
+
+  // Organization data
   const dummyOrganizationData = {
-    organizationName: "AluminumCorp Industries",
-    logoBrandingAssets: null
+    organizationName: "GreenMetal Solutions",
+    logoBrandingAssets: null,
   }
 
   async function fetchAluminumData() {
     setLoading(true)
     setError("")
-    
     try {
       // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
       // Set dummy data
       setAluminumData(dummyAluminumData)
       setMaterialCharts(dummyMaterialComposition)
       setCarbonFootprint(dummyCarbonFootprint)
       setRecycledContentData(dummyRecycledContent)
       setOrganizationData(dummyOrganizationData)
-      
-      // Calculate aluminum health based on purity and certifications
+
+      // Calculate aluminum health based on purity, sustainability score, and certifications
       const healthScore = Math.min(100, 
-        (dummyAluminumData.purity * 0.6) + 
-        (dummyAluminumData.sustainabilityScore * 0.4)
+        dummyAluminumData.purity * 0.4 + 
+        dummyAluminumData.sustainabilityScore * 0.3 + 
+        (dummyAluminumData.compliance.certifications.length * 10) * 0.3
       )
       setAluminumHealth(Math.round(healthScore))
-      
     } catch (err) {
       console.error(err)
       setError(err.message)
@@ -203,7 +195,7 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
 
   if (!aluminumData) return null
 
-  const currentURL = window.location.href
+  const currentURL = typeof window !== "undefined" ? window.location.href : aluminumData.qrCodeUrl
 
   return (
     <div className="max-w-7xl mx-auto p-8 mt-2 bg-gradient-to-br from-slate-50 to-gray-50 rounded-2xl shadow-lg">
@@ -215,10 +207,15 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
           <div className="font-mono text-xs bg-white p-2 rounded-lg shadow-inner break-all">
             {aluminumData.passportId}
           </div>
+          <div className="flex items-center gap-4 text-xs text-gray-500">
+            <span>Version: {aluminumData.version}</span>
+            <span>Created: {new Date(aluminumData.createdAt).toLocaleDateString()}</span>
+            <span>Updated: {new Date(aluminumData.lastUpdated).toLocaleDateString()}</span>
+          </div>
         </div>
         <div className="flex items-center gap-2 bg-green-100 px-4 py-2 rounded-full">
           <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
-          <span className="text-green-700 font-semibold">Verified</span>
+          <span className="text-green-700 font-semibold">{aluminumData.status}</span>
         </div>
       </div>
 
@@ -232,9 +229,11 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
             { label: "Category", value: aluminumData.category },
             { label: "Weight", value: `${aluminumData.weight} kg` },
             { label: "Purity", value: `${aluminumData.purity}%` },
-            { label: "Density", value: aluminumData.density },
+            { label: "Density", value: aluminumData.materialProperties.density },
             { label: "Status", value: aluminumData.status, status: true },
-            { label: "Manufactured", value: aluminumData.manufacturedDate },
+            { label: "Thickness", value: aluminumData.dimensions.thickness },
+            { label: "Width", value: aluminumData.dimensions.width },
+            { label: "Length", value: aluminumData.dimensions.length },
           ].map((item, index) => (
             <div key={index}>
               <div className="text-gray-500 text-xs uppercase mb-1">{item.label}</div>
@@ -249,34 +248,33 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
             </div>
           ))}
         </div>
-
         {/* Image Section */}
         <div className="flex justify-center">
-          <div className="w-56 h-56 bg-gradient-to-br from-slate-300 to-gray-400 rounded-lg flex items-center justify-center">
-            <Package className="w-32 h-32 text-slate-600" />
+          <div className="w-56 h-56 bg-white rounded-lg shadow-md overflow-hidden">
+            <img
+              src="/Industrial_Aluminum_Profile_Custom_Aluminium_Extrusion_Profiles-Metalli_Industrial-removebg-preview.png"
+              alt="Aluminum Profiles Collection"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
-
         {/* MANUFACTURER INFO */}
         <div className="bg-gradient-to-br from-slate-600 to-slate-800 p-6 rounded-xl shadow-md text-white">
-          <div className="text-xs uppercase mb-1 opacity-80">Manufacturer</div>
-          <div className="font-bold text-lg">{aluminumData.manufacturer}</div>
-          
-          <div className="text-xs uppercase mb-1 opacity-80 mt-4">Economic Operator</div>
-          <div className="font-bold text-lg">{aluminumData.economicOperator}</div>
-          
-          {/* Economic Operator Organization Logo */}
+          <div className="text-xs uppercase mb-1 opacity-80">Final Assembly</div>
+          <div className="font-bold text-lg">{aluminumData.supplyChain.finalAssembly.company}</div>
+          <div className="text-xs uppercase mb-1 opacity-80 mt-4">Location</div>
+          <div className="font-bold text-lg">{aluminumData.supplyChain.finalAssembly.location}</div>
+          {/* Organization Logo */}
           <div className="mt-2 flex items-center gap-3">
             <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
               <span className="text-gray-500 text-xs font-bold">
-                {organizationData?.organizationName?.substring(0, 2).toUpperCase() || 'AC'}
+                {organizationData?.organizationName?.substring(0, 2).toUpperCase() || "GS"}
               </span>
             </div>
             {organizationData?.organizationName && (
               <div className="text-sm opacity-90">{organizationData.organizationName}</div>
             )}
           </div>
-          
           <div className="mt-4">
             <div className="text-xs uppercase mb-1 opacity-80">Sustainability Score</div>
             <div className="w-full bg-slate-300 rounded-full h-2">
@@ -296,36 +294,45 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
           {/* QR Code Section */}
           <div className="flex-shrink-0">
             <div className="relative w-36 h-36 sm:w-40 sm:h-40 flex flex-col items-center">
-              <div className="w-full h-full bg-gray-100 rounded-lg shadow-inner flex items-center justify-center">
-                <PassportQRCode url={currentURL} />
+              <div className="w-full h-full bg-gray-100 rounded-lg shadow-inner flex items-center justify-center relative">
+                <PassportQRCode 
+                  url="http://localhost:5173/aluminum-passport" 
+                  size={160} 
+                />
               </div>
+              <div className="text-xs text-gray-500 mt-2">Scan for details</div>
             </div>
           </div>
 
-          {/* Aluminum & Carbon Info Section */}
+          {/* Carbon & Health Info Section */}
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             {/* Carbon Footprint Section */}
-            <div className="text-center sm:text-left bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-lg border border-green-100 min-w-[140px]">
-              <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                <div className="p-1.5 bg-green-100 rounded-full">
-                  <Leaf className="w-4 h-4 text-green-600" />
+            <div className="text-center bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-100 min-w-[140px] h-48 sm:h-52 flex flex-col justify-center space-y-6">
+              <div className="flex flex-col items-center space-y-3">
+                <div className="p-3 bg-green-100 rounded-full">
+                  <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                    CF
+                  </div>
                 </div>
-                <span className="text-xs font-medium text-gray-600">Carbon Footprint</span>
+                <span className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Carbon Footprint</span>
               </div>
-              <div className="text-2xl font-bold text-gray-800 mb-0.5">{carbonFootprint.total}</div>
-              <div className="text-xs text-gray-500">kgCO₂e/kg</div>
+              <div className="text-4xl font-bold text-gray-800">{carbonFootprint.total}</div>
+              <div className="text-xs text-gray-500 font-medium">kgCO₂e/kg</div>
+              <div className="text-xs text-green-600 font-medium">Verified by {aluminumData.carbonFootprint.verifier}</div>
             </div>
-
             {/* Aluminum Health Section */}
-            <div className="text-center sm:text-left bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-lg border border-blue-100 min-w-[130px]">
-              <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                <div className="p-1.5 bg-blue-100 rounded-full">
-                  <GiHealthCapsule className="w-4 h-4 text-blue-600" />
+            <div className="text-center bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border border-blue-100 min-w-[130px] h-48 sm:h-52 flex flex-col justify-center space-y-6">
+              <div className="flex flex-col items-center space-y-3">
+                <div className="p-3 bg-blue-100 rounded-full">
+                  <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                    AQ
+                  </div>
                 </div>
-                <span className="text-xs font-medium text-gray-600">Aluminum Quality</span>
+                <span className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Aluminum Quality</span>
               </div>
-              <div className="text-2xl font-bold text-green-600 mb-0.5">{aluminumHealth}%</div>
-              <div className="text-xs text-gray-500">Premium Grade</div>
+              <div className="text-4xl font-bold text-green-600">{aluminumHealth}%</div>
+              <div className="text-xs text-gray-500 font-medium">Premium Grade</div>
+              <div className="text-xs text-blue-600 font-medium">{aluminumData.recyclability} Recyclable</div>
             </div>
           </div>
 
@@ -334,17 +341,16 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
               {materialCharts.slice(0, 4).map((material, index) => {
                 const colors = [
-                  { bg: "bg-slate-500", text: "text-slate-600" },
-                  { bg: "bg-blue-500", text: "text-blue-600" },
-                  { bg: "bg-green-500", text: "text-green-600" },
-                  { bg: "bg-yellow-500", text: "text-yellow-600" },
+                  { bg: "bg-slate-500", text: "text-slate-600", stroke: "stroke-slate-500" },
+                  { bg: "bg-blue-500", text: "text-blue-600", stroke: "stroke-blue-500" },
+                  { bg: "bg-green-500", text: "text-green-600", stroke: "stroke-green-500" },
+                  { bg: "bg-yellow-500", text: "text-yellow-600", stroke: "stroke-yellow-500" },
                 ]
                 const color = colors[index] || colors[0]
-
                 return (
                   <div
                     key={index}
-                    className="flex flex-col items-center space-y-2 p-3 sm:p-4 rounded-lg shadow-md bg-white transition-transform transform hover:scale-105"
+                    className="flex flex-col items-center justify-center space-y-2 p-3 sm:p-4 rounded-lg shadow-md bg-white transition-transform transform hover:scale-105 w-32 h-48 sm:w-36 sm:h-52"
                   >
                     <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
                       <svg className="w-full h-full" viewBox="0 0 36 36">
@@ -358,7 +364,7 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
                           cy="18"
                         />
                         <circle
-                          className={`${color.bg} stroke-current`}
+                          className={`${color.stroke} stroke-current`}
                           strokeWidth="3"
                           strokeLinecap="round"
                           fill="transparent"
@@ -394,18 +400,40 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
         <h2 className="text-xl font-bold text-slate-800 mb-4">Technical Specifications</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: "Tensile Strength", value: aluminumData.tensileStrength },
-            { label: "Yield Strength", value: aluminumData.yieldStrength },
-            { label: "Elongation", value: aluminumData.elongation },
-            { label: "Hardness", value: aluminumData.hardness },
-            { label: "Melting Point", value: aluminumData.meltingPoint },
-            { label: "Conductivity", value: aluminumData.conductivity },
-            { label: "Corrosion Resistance", value: aluminumData.corrosionResistance },
+            { label: "Tensile Strength", value: aluminumData.materialProperties.tensileStrength },
+            { label: "Yield Strength", value: aluminumData.materialProperties.yieldStrength },
+            { label: "Elongation", value: aluminumData.materialProperties.elongation },
+            { label: "Hardness", value: aluminumData.materialProperties.hardness },
+            { label: "Melting Point", value: aluminumData.materialProperties.meltingPoint },
+            { label: "Thermal Conductivity", value: aluminumData.materialProperties.thermalConductivity },
+            { label: "Corrosion Resistance", value: aluminumData.materialProperties.corrosionResistance },
             { label: "Recyclability", value: aluminumData.recyclability },
           ].map((spec, index) => (
             <div key={index} className="bg-gray-50 p-3 rounded-lg">
               <div className="text-xs text-gray-500 uppercase mb-1">{spec.label}</div>
               <div className="font-semibold text-slate-800">{spec.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* SUSTAINABILITY METRICS */}
+      <div className="bg-white p-6 rounded-xl mt-6 shadow-lg">
+        <h2 className="text-xl font-bold text-slate-800 mb-4">Sustainability Metrics</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { label: "Water Usage", value: aluminumData.waterUsage, color: "text-blue-600" },
+            { label: "Energy Source", value: aluminumData.energySource.type, color: "text-green-600" },
+            { label: "Renewable Energy", value: `${aluminumData.energySource.renewablePercentage}%`, color: "text-green-600" },
+            { label: "Recycled Content", value: `${aluminumData.recycledContent.preConsumer + aluminumData.recycledContent.postConsumer}%`, color: "text-purple-600" },
+            { label: "Pre-Consumer", value: `${aluminumData.recycledContent.preConsumer}%`, color: "text-blue-600" },
+            { label: "Post-Consumer", value: `${aluminumData.recycledContent.postConsumer}%`, color: "text-green-600" },
+            { label: "CBAM Ready", value: aluminumData.compliance.cbamReady ? "Yes" : "No", color: aluminumData.compliance.cbamReady ? "text-green-600" : "text-red-600" },
+            { label: "DPP Ready", value: aluminumData.compliance.digitalProductPassportReady ? "Yes" : "No", color: aluminumData.compliance.digitalProductPassportReady ? "text-green-600" : "text-red-600" },
+          ].map((metric, index) => (
+            <div key={index} className="bg-gray-50 p-3 rounded-lg">
+              <div className="text-xs text-gray-500 uppercase mb-1">{metric.label}</div>
+              <div className={`font-semibold ${metric.color}`}>{metric.value}</div>
             </div>
           ))}
         </div>
@@ -424,85 +452,213 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
             ))}
           </div>
         </div>
-        
         <div className="bg-white p-6 rounded-xl shadow-lg">
-          <h2 className="text-xl font-bold text-slate-800 mb-4">Certifications</h2>
+          <h2 className="text-xl font-bold text-slate-800 mb-4">Certifications & Compliance</h2>
           <div className="space-y-2">
-            {aluminumData.certifications.map((cert, index) => (
+            {aluminumData.compliance.certifications.map((cert, index) => (
               <div key={index} className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span className="text-slate-700">{cert}</span>
               </div>
             ))}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <div className="text-sm text-gray-600">Product Category Code: {aluminumData.compliance.productCategoryCode}</div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* SUPPLY CHAIN */}
+      {/* ESG CERTIFICATES */}
       <div className="bg-white p-6 rounded-xl mt-6 shadow-lg">
-        <h2 className="text-xl font-bold text-slate-800 mb-4">Supply Chain</h2>
+        <h2 className="text-xl font-bold text-slate-800 mb-4">ESG Certificates</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Object.entries(aluminumData.supplyChain).map(([stage, location], index) => (
-            <div key={index} className="bg-gradient-to-br from-slate-50 to-gray-100 p-4 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <Truck className="w-4 h-4 text-slate-600" />
-                <span className="text-xs text-gray-500 uppercase">{stage.replace(/([A-Z])/g, ' $1').trim()}</span>
+          {aluminumData.esgCertificates.map((cert, index) => (
+            <div key={index} className="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-lg border border-green-200">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-sm font-semibold text-green-800">{cert}</span>
               </div>
-              <div className="font-semibold text-slate-800">{location}</div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* DETAILED SUPPLY CHAIN */}
+      <div className="bg-white p-6 rounded-xl mt-6 shadow-lg">
+        <h2 className="text-xl font-bold text-slate-800 mb-4">Supply Chain Journey</h2>
+        <div className="space-y-4">
+          {Object.entries(aluminumData.supplyChain).map(([stage, details], index) => (
+            <div key={index} className="bg-gradient-to-br from-slate-50 to-gray-100 p-4 rounded-lg">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-4 h-4 bg-slate-600 rounded-sm flex items-center justify-center text-white text-xs font-bold">
+                  {index + 1}
+                </div>
+                <span className="text-sm font-semibold text-gray-700 uppercase">{stage.replace(/([A-Z])/g, " $1").trim()}</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <span className="text-gray-500">Location: </span>
+                  <span className="font-semibold text-slate-800">{details.location || details.source}</span>
+                </div>
+                <div>
+                  <span className="text-gray-500">Date: </span>
+                  <span className="font-semibold text-slate-800">{details.date}</span>
+                </div>
+                <div>
+                  <span className="text-gray-500">Company: </span>
+                  <span className="font-semibold text-slate-800">{details.company || details.miner || details.refiner || details.plant}</span>
+                </div>
+                {details.emissions && (
+                  <div>
+                    <span className="text-gray-500">Emissions: </span>
+                    <span className="font-semibold text-slate-800">{details.emissions} kgCO₂e</span>
+                  </div>
+                )}
+                {details.energySource && (
+                  <div>
+                    <span className="text-gray-500">Energy: </span>
+                    <span className="font-semibold text-slate-800">{details.energySource}</span>
+                  </div>
+                )}
+                {details.certification && (
+                  <div>
+                    <span className="text-gray-500">Certifications: </span>
+                    <span className="font-semibold text-slate-800">{details.certification.join(", ")}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* LIFECYCLE INFORMATION */}
+      <div className="bg-white p-6 rounded-xl mt-6 shadow-lg">
+        <h2 className="text-xl font-bold text-slate-800 mb-4">Lifecycle Information</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { label: "Service Life", value: aluminumData.lifecycle.estimatedServiceLife },
+            { label: "Maintenance", value: aluminumData.lifecycle.maintenanceRequired },
+            { label: "Expected End Use", value: aluminumData.lifecycle.expectedEndUse },
+            { label: "Disassembly", value: "Available", link: aluminumData.lifecycle.disassemblyInstructionsUrl },
+          ].map((info, index) => (
+            <div key={index} className="bg-gray-50 p-3 rounded-lg">
+              <div className="text-xs text-gray-500 uppercase mb-1">{info.label}</div>
+              {info.link ? (
+                <a href={info.link} className="font-semibold text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+                  {info.value}
+                </a>
+              ) : (
+                <div className="font-semibold text-slate-800">{info.value}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+
+
 
       {/* SUMMARY REPORT */}
       <div className="container mx-auto pt-8">
         <h1 className="text-3xl font-bold text-center mb-8">Summary Report</h1>
 
         {/* Carbon Footprint */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Carbon Footprint</h2>
-          <div className="flex justify-center items-center w-full rounded-lg">
-            <PieChartJs data={carbonFootprint.byStage} />
+        <div className="mb-12 bg-white p-6 rounded-xl shadow-lg">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Carbon Footprint Analysis</h2>
+          <div className="mb-4 p-4 bg-green-50 rounded-lg">
+            <div className="flex justify-between items-center">
+              <div>
+                <div className="text-sm text-gray-600">Methodology: {aluminumData.carbonFootprint.methodology}</div>
+                <div className="text-sm text-gray-600">Verifier: {aluminumData.carbonFootprint.verifier}</div>
+                <div className="text-sm text-gray-600">Verification Date: {aluminumData.carbonFootprint.verificationDate}</div>
+              </div>
+              <div className="text-right">
+                <div className="text-2xl font-bold text-green-600">{carbonFootprint.total} kgCO₂e/kg</div>
+                <div className="text-sm text-gray-600">Total Carbon Footprint</div>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-4">
+            {carbonFootprint.byStage.map((stage, index) => (
+              <div key={index} className="flex items-center gap-4">
+                <div className="w-36 text-right text-sm font-medium text-gray-600">{stage.name}</div>
+                <div className="flex-1 bg-gray-200 rounded-full h-4">
+                  <div
+                    className="bg-green-500 h-4 rounded-full"
+                    style={{ width: `${(stage.value / carbonFootprint.total) * 100}%` }}
+                  ></div>
+                </div>
+                <div className="w-24 text-left text-sm font-semibold text-gray-800">{stage.value} kgCO₂e</div>
+                <div className="w-20 text-left text-xs text-gray-500">{stage.scope}</div>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Recycled Content Share */}
-        <div className="mb-12">
+        <div className="mb-12 bg-white p-6 rounded-xl shadow-lg">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Recycled Content Share</h2>
-          <div className="flex flex-wrap justify-center gap-6">
-            <div className="w-full md:flex gap-2">
-              <div className="grid grid-cols-2 md:grid-cols-4 w-full">
-                {recycledContentData.map((material, index) => (
-                  <div key={index} className="flex justify-center">
-                    <DonutChart
-                      backendData={{
-                        material: material.material,
-                        preConsumerShare: material.preConsumerShare,
-                        postConsumerShare: material.postConsumerShare,
-                        totalRecycledShare: material.totalRecycledShare,
-                        shares: [
-                          {
-                            label: "Pre-Consumer",
-                            value: material.preConsumerShare,
-                          },
-                          {
-                            label: "Post-Consumer",
-                            value: material.postConsumerShare,
-                          },
-                          {
-                            label: "Virgin Material",
-                            value: Math.max(0, 100 - material.totalRecycledShare),
-                          },
-                        ],
-                      }}
-                    />
+          <div className="space-y-6">
+            {recycledContentData.map((material, index) => (
+              <div key={index} className="border p-4 rounded-lg bg-gray-50">
+                <h3 className="text-lg font-semibold text-gray-700 mb-3">{material.material}</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-medium text-gray-600 w-28">Pre-Consumer:</span>
+                    <div className="flex-1 bg-blue-100 rounded-full h-3">
+                      <div
+                        className="bg-blue-500 h-3 rounded-full"
+                        style={{ width: `${material.preConsumerShare}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-semibold text-blue-700 w-10 text-right">
+                      {material.preConsumerShare}%
+                    </span>
                   </div>
-                ))}
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-medium text-gray-600 w-28">Post-Consumer:</span>
+                    <div className="flex-1 bg-green-100 rounded-full h-3">
+                      <div
+                        className="bg-green-500 h-3 rounded-full"
+                        style={{ width: `${material.postConsumerShare}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-semibold text-green-700 w-10 text-right">
+                      {material.postConsumerShare}%
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-medium text-gray-600 w-28">Virgin Material:</span>
+                    <div className="flex-1 bg-red-100 rounded-full h-3">
+                      <div
+                        className="bg-red-500 h-3 rounded-full"
+                        style={{ width: `${Math.max(0, 100 - material.totalRecycledShare)}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-semibold text-red-700 w-10 text-right">
+                      {Math.max(0, 100 - material.totalRecycledShare)}%
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3 pt-2 border-t border-gray-200 mt-2">
+                    <span className="text-base font-bold text-gray-800 w-28">Total Recycled:</span>
+                    <div className="flex-1 bg-purple-100 rounded-full h-4">
+                      <div
+                        className="bg-purple-600 h-4 rounded-full"
+                        style={{ width: `${material.totalRecycledShare}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-base font-bold text-purple-800 w-10 text-right">
+                      {material.totalRecycledShare}%
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   )
-} 
+}
