@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import PassportQRCode from "./PassportQRCode"
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend, ComposedChart, Area } from 'recharts'
 
 export default function AluminumPassportComponent({ tokenId: externalTokenId }) {
   const initialTokenId = externalTokenId || "AL-001"
@@ -117,12 +118,36 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
     ],
   }
 
-  // Enhanced recycled content data
+  // Enhanced recycled content data for Recharts
   const dummyRecycledContent = [
-    { material: "Aluminum", preConsumerShare: 20, postConsumerShare: 30, totalRecycledShare: 50 },
-    { material: "Silicon", preConsumerShare: 15, postConsumerShare: 5, totalRecycledShare: 20 },
-    { material: "Magnesium", preConsumerShare: 10, postConsumerShare: 5, totalRecycledShare: 15 },
-    { material: "Other Alloys", preConsumerShare: 8, postConsumerShare: 2, totalRecycledShare: 10 },
+    { 
+      material: "Aluminum", 
+      preConsumer: 20, 
+      postConsumer: 30, 
+      virgin: 50,
+      totalRecycled: 50 
+    },
+    { 
+      material: "Silicon", 
+      preConsumer: 15, 
+      postConsumer: 5, 
+      virgin: 80,
+      totalRecycled: 20 
+    },
+    { 
+      material: "Magnesium", 
+      preConsumer: 10, 
+      postConsumer: 5, 
+      virgin: 85,
+      totalRecycled: 15 
+    },
+    { 
+      material: "Other Alloys", 
+      preConsumer: 8, 
+      postConsumer: 2, 
+      virgin: 90,
+      totalRecycled: 10 
+    },
   ]
 
   // Organization data
@@ -599,63 +624,141 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
 
         {/* Recycled Content Share */}
         <div className="mb-12 bg-white p-6 rounded-xl shadow-lg">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Recycled Content Share</h2>
-          <div className="space-y-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Recycled Content Share</h2>
+          
+          {/* Enhanced Progress Bars */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             {recycledContentData.map((material, index) => (
-              <div key={index} className="border p-4 rounded-lg bg-gray-50">
-                <h3 className="text-lg font-semibold text-gray-700 mb-3">{material.material}</h3>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-gray-600 w-28">Pre-Consumer:</span>
-                    <div className="flex-1 bg-blue-100 rounded-full h-3">
+              <div key={index} className="border border-gray-200 p-6 rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-sm hover:shadow-md transition-shadow">
+                <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                  <div className={`w-3 h-3 rounded-full ${index === 0 ? 'bg-emerald-500' : index === 1 ? 'bg-blue-500' : index === 2 ? 'bg-purple-500' : 'bg-orange-500'}`}></div>
+                  {material.material}
+                </h3>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="font-medium text-gray-600">Pre-Consumer</span>
+                      <span className="font-bold text-emerald-600">{material.preConsumer}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-3">
                       <div
-                        className="bg-blue-500 h-3 rounded-full"
-                        style={{ width: `${material.preConsumerShare}%` }}
+                        className="bg-gradient-to-r from-emerald-400 to-emerald-600 h-3 rounded-full transition-all duration-700 ease-out"
+                        style={{ width: `${material.preConsumer}%` }}
                       ></div>
                     </div>
-                    <span className="text-sm font-semibold text-blue-700 w-10 text-right">
-                      {material.preConsumerShare}%
-                    </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-gray-600 w-28">Post-Consumer:</span>
-                    <div className="flex-1 bg-green-100 rounded-full h-3">
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="font-medium text-gray-600">Post-Consumer</span>
+                      <span className="font-bold text-blue-600">{material.postConsumer}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-3">
                       <div
-                        className="bg-green-500 h-3 rounded-full"
-                        style={{ width: `${material.postConsumerShare}%` }}
+                        className="bg-gradient-to-r from-blue-400 to-blue-600 h-3 rounded-full transition-all duration-700 ease-out"
+                        style={{ width: `${material.postConsumer}%` }}
                       ></div>
                     </div>
-                    <span className="text-sm font-semibold text-green-700 w-10 text-right">
-                      {material.postConsumerShare}%
-                    </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-gray-600 w-28">Virgin Material:</span>
-                    <div className="flex-1 bg-red-100 rounded-full h-3">
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="font-medium text-gray-600">Virgin Material</span>
+                      <span className="font-bold text-rose-600">{material.virgin}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-3">
                       <div
-                        className="bg-red-500 h-3 rounded-full"
-                        style={{ width: `${Math.max(0, 100 - material.totalRecycledShare)}%` }}
+                        className="bg-gradient-to-r from-rose-400 to-rose-600 h-3 rounded-full transition-all duration-700 ease-out"
+                        style={{ width: `${material.virgin}%` }}
                       ></div>
                     </div>
-                    <span className="text-sm font-semibold text-red-700 w-10 text-right">
-                      {Math.max(0, 100 - material.totalRecycledShare)}%
-                    </span>
                   </div>
-                  <div className="flex items-center gap-3 pt-2 border-t border-gray-200 mt-2">
-                    <span className="text-base font-bold text-gray-800 w-28">Total Recycled:</span>
-                    <div className="flex-1 bg-purple-100 rounded-full h-4">
+                  
+                  <div className="pt-3 border-t border-gray-200 space-y-2">
+                    <div className="flex justify-between text-base">
+                      <span className="font-bold text-gray-800">Total Recycled</span>
+                      <span className="font-bold text-purple-600">{material.totalRecycled}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-4">
                       <div
-                        className="bg-purple-600 h-4 rounded-full"
-                        style={{ width: `${material.totalRecycledShare}%` }}
+                        className="bg-gradient-to-r from-purple-400 to-purple-600 h-4 rounded-full transition-all duration-700 ease-out"
+                        style={{ width: `${material.totalRecycled}%` }}
                       ></div>
                     </div>
-                    <span className="text-base font-bold text-purple-800 w-10 text-right">
-                      {material.totalRecycledShare}%
-                    </span>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+          
+          {/* Enhanced Chart Visualizations */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Stacked Bar Chart */}
+            <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200">
+              <h3 className="text-lg font-bold text-gray-800 mb-4">Material Composition Overview</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <ComposedChart data={recycledContentData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                    <XAxis dataKey="material" tick={{ fontSize: 12, fill: '#6B7280' }} />
+                    <YAxis tick={{ fontSize: 12, fill: '#6B7280' }} />
+                    <Tooltip 
+                      formatter={(value, name) => [`${value}%`, name]}
+                      labelStyle={{ color: '#374151', fontWeight: 'bold' }}
+                      contentStyle={{ 
+                        backgroundColor: '#FFFFFF', 
+                        border: '1px solid #E5E7EB',
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                      }}
+                    />
+                    <Bar dataKey="preConsumer" stackId="a" fill="#10B981" name="Pre-Consumer" radius={[0, 0, 4, 4]} />
+                    <Bar dataKey="postConsumer" stackId="a" fill="#3B82F6" name="Post-Consumer" radius={[0, 0, 4, 4]} />
+                    <Bar dataKey="virgin" stackId="a" fill="#EF4444" name="Virgin Material" radius={[0, 0, 4, 4]} />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+            
+            {/* Pie Chart for Total Recycled Content */}
+            <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200">
+              <h3 className="text-lg font-bold text-gray-800 mb-4">Total Recycled Content Distribution</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={recycledContentData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={40}
+                      outerRadius={80}
+                      paddingAngle={5}
+                      dataKey="totalRecycled"
+                    >
+                      {recycledContentData.map((entry, index) => (
+                        <Cell 
+                          key={`cell-${index}`} 
+                          fill={['#10B981', '#3B82F6', '#8B5CF6', '#F59E0B'][index % 4]} 
+                        />
+                      ))}
+                    </Pie>
+                    <Tooltip 
+                      formatter={(value) => [`${value}%`, 'Recycled Content']}
+                      contentStyle={{ 
+                        backgroundColor: '#FFFFFF', 
+                        border: '1px solid #E5E7EB',
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                      }}
+                    />
+                    <Legend 
+                      verticalAlign="bottom" 
+                      height={36}
+                      formatter={(value, entry) => [value, entry.payload.material]}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </div>
         </div>
       </div>
