@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for enhanced miner dashboard */
+@layer components {
+  .miner-gradient-bg {
+    background: linear-gradient(135deg, #f8fafc 0%, #dbeafe 50%, #e0e7ff 100%);
+  }
+  
+  .miner-card-hover {
+    @apply transition-all duration-300 hover:shadow-2xl hover:scale-105;
+  }
+  
+  .miner-button-primary {
+    @apply bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-4 px-8 rounded-2xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg transform hover:scale-105;
+  }
+  
+  .miner-input-field {
+    @apply w-full px-6 py-4 border-2 border-slate-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 text-slate-900 placeholder-slate-400 bg-white/80 backdrop-blur-sm;
+  }
+  
+  .miner-stat-card {
+    @apply bg-gradient-to-br rounded-2xl p-6 text-white shadow-xl border transition-all duration-300 hover:shadow-2xl hover:scale-105;
+  }
+  
+  .miner-table-header {
+    @apply bg-gradient-to-r from-slate-100 to-blue-100;
+  }
+  
+  .miner-table-row {
+    @apply hover:bg-slate-50/50 transition-all duration-300;
+  }
+  
+  .miner-activity-card {
+    @apply flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200 hover:shadow-xl transition-all duration-300 hover:scale-105;
+  }
+  
+  .miner-icon-container {
+    @apply bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-2xl shadow-lg;
+  }
+  
+  .miner-loading-spinner {
+    @apply animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto mb-6;
+  }
+  
+  .miner-empty-state {
+    @apply bg-gradient-to-br from-slate-100 to-blue-100 rounded-full p-6 w-24 h-24 mx-auto mb-6 flex items-center justify-center;
+  }
+  
+  .miner-tab-active {
+    @apply bg-white text-slate-900 shadow-lg border border-slate-300 transform scale-105;
+  }
+  
+  .miner-tab-inactive {
+    @apply text-slate-600 hover:text-slate-900 hover:bg-white/50 hover:shadow-md;
+  }
+  
+  .miner-section-header {
+    @apply bg-gradient-to-r from-blue-600 to-indigo-700 px-8 py-6 flex justify-between items-center;
+  }
+  
+  .miner-section-title {
+    @apply text-xl font-bold text-white flex items-center gap-4;
+  }
+  
+  .miner-section-icon {
+    @apply bg-white/20 p-3 rounded-xl;
+  }
+  
+  /* New sophisticated color variations */
+  .miner-stat-blue {
+    @apply bg-gradient-to-br from-blue-600 to-indigo-700 border-blue-500;
+  }
+  
+  .miner-stat-teal {
+    @apply bg-gradient-to-br from-teal-600 to-cyan-700 border-teal-500;
+  }
+  
+  .miner-stat-copper {
+    @apply bg-gradient-to-br from-orange-600 to-red-600 border-orange-500;
+  }
+  
+  .miner-activity-teal {
+    @apply bg-gradient-to-br from-teal-500 to-cyan-600;
+  }
+  
+  .miner-chemistry-teal {
+    @apply bg-gradient-to-br from-teal-500 to-cyan-600;
+  }
+  
+  .miner-materials-copper {
+    @apply bg-gradient-to-br from-orange-500 to-red-600;
+  }
+}
