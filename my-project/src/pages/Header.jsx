@@ -106,7 +106,7 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <a href="/" className="flex items-center space-x-2">
-            <img className="h-8 w-8 sm:h-10 sm:w-10" src="/image.png" alt="Logo" />
+            <img className="h-4 w-6  sm:h-10 sm:w-16" src="/aeiforo.png" alt="Logo" />
             <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 via-blue-400 to-blue-800 bg-clip-text text-transparent">
               ALtrail
             </span>
