@@ -107,6 +107,9 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           <a href="/" className="flex items-center space-x-2">
             <img className="h-8 w-8 sm:h-10 sm:w-10" src="/image.png" alt="Logo" />
+            <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 via-blue-400 to-blue-800 bg-clip-text text-transparent">
+              ALtrail
+            </span>
           </a>
           <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (

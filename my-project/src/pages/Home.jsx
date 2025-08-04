@@ -218,7 +218,7 @@ return (
           transition={{ duration: 1 }}
           className="absolute inset-0 overflow-hidden"
         >
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#00FFB0] rounded-full filter blur-3xl opacity-20"></div>
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#FF00B0] rounded-full filter blur-3xl opacity-20"></div>
         </motion.div>
 
@@ -235,7 +235,7 @@ return (
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
               >
                 Revolutionizing Aluminium Traceability for a{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FFB0] to-[#00E69E]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700">
                   Sustainable Future
                 </span>
               </motion.h1>
@@ -247,7 +247,7 @@ return (
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center px-6 py-3 rounded-full bg-[#00FFB0] hover:bg-[#00E69E] text-black font-semibold transition-colors"
+                  className="inline-flex items-center px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-semibold transition-colors"
                 >
                   Contact us
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -255,7 +255,7 @@ return (
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center px-6 py-3 rounded-full border border-[#00FFB0] text-[#00FFB0] hover:bg-[#00FFB0] hover:text-black font-semibold transition-colors"
+                  className="inline-flex items-center px-6 py-3 rounded-full border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white font-semibold transition-colors"
                 >
                   Learn More
                 </motion.button>
@@ -327,7 +327,7 @@ return (
                 variants={fadeIn}
                 className="bg-white/80 backdrop-blur-lg rounded-lg p-6 text-gray-900 hover:bg-white/90 transition-colors shadow-lg"
               >
-                <feature.icon className="w-12 h-12 text-[#00FFB0] mb-4" />
+                <feature.icon className="w-12 h-12 text-blue-500 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-700">{feature.description}</p>
               </motion.div>
@@ -410,19 +410,19 @@ return (
 
           {/* Right Column - Battery Passport UI */}
           <div className="relative ">
-             <img src="Alminium_passport.png" alt="Aluminium Passport Interface"  className="border-8 border-green-500 rounded-lg shadow-lg shadow-green-500/50"/>
+             <img src="Alminium_passport.png" alt="Aluminium Passport Interface"  className="border-8 border-blue-500 rounded-lg shadow-lg shadow-blue-500/50"/>
           </div>
         </div>
       </div>
     </section>
-    <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50 to-emerald-100/50 py-20">
+    <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-blue-100/50 py-20">
       {/* Background Pattern */}
       <div
         className="absolute inset-0 grid grid-cols-3 -skew-y-12 opacity-[0.03]"
         aria-hidden="true"
       >
         {[...Array(30)].map((_, i) => (
-          <div key={i} className="border-r border-b border-emerald-900" />
+          <div key={i} className="border-r border-b border-blue-900" />
         ))}
       </div>
 
