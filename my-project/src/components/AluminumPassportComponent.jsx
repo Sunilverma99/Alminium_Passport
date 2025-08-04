@@ -121,6 +121,7 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
   // Enhanced recycled content data for Recharts
   const dummyRecycledContent = [
     { 
+      name: "Aluminum",
       material: "Aluminum", 
       preConsumer: 20, 
       postConsumer: 30, 
@@ -128,6 +129,7 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
       totalRecycled: 50 
     },
     { 
+      name: "Silicon",
       material: "Silicon", 
       preConsumer: 15, 
       postConsumer: 5, 
@@ -135,6 +137,7 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
       totalRecycled: 20 
     },
     { 
+      name: "Magnesium",
       material: "Magnesium", 
       preConsumer: 10, 
       postConsumer: 5, 
@@ -142,6 +145,7 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
       totalRecycled: 15 
     },
     { 
+      name: "Other Alloys",
       material: "Other Alloys", 
       preConsumer: 8, 
       postConsumer: 2, 
@@ -753,7 +757,6 @@ export default function AluminumPassportComponent({ tokenId: externalTokenId }) 
                     <Legend 
                       verticalAlign="bottom" 
                       height={36}
-                      formatter={(value, entry) => [value, entry.payload.material]}
                     />
                   </PieChart>
                 </ResponsiveContainer>
