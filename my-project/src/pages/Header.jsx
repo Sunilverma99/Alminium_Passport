@@ -1,7 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Wallet, Menu, X, LogOut, ChevronDown, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { initializeContract, disconnectWallet, resetDisconnectFlag } from '../redux/contractSlice';
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -16,31 +18,79 @@ const navItems = [
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
-  const [userAddress, setUserAddress] = useState(null);
   const menuRef = useRef(null);
   const profileRef = useRef(null);
   const navigate = useNavigate();
+  
+  // Redux hooks
+  const dispatch = useAppDispatch();
+  const { userAddress, isConnected, isLoading, error, manuallyDisconnected } = useAppSelector(state => state.contract);
 
-  // Demo function - does nothing when clicked
-  const handleConnectWallet = () => {
-    console.log('Connect wallet button clicked - demo mode');
-    // Do nothing in demo mode
+  // Handle wallet connection
+  const handleConnectWallet = async () => {
+    try {
+      console.log('Connecting wallet...');
+      // Reset disconnect flag to allow reconnection
+      dispatch(resetDisconnectFlag());
+      await dispatch(initializeContract()).unwrap();
+      console.log('Wallet connected successfully');
+    } catch (error) {
+      console.error('Failed to connect wallet:', error);
+    }
   };
 
-  // Demo function - does nothing when clicked
+  // Handle wallet disconnection
   const handleDisconnect = () => {
-    console.log('Disconnect button clicked - demo mode');
-    // Do nothing in demo mode
+    console.log('Disconnecting wallet...');
+    dispatch(disconnectWallet());
+    setIsProfileOpen(false);
+    console.log('Wallet disconnected');
   };
 
-  // Demo function - does nothing when clicked
+  // Handle profile click
   const handleProfileClick = () => {
-    console.log('Profile button clicked - demo mode');
     setIsProfileOpen(false);
-    // Do nothing in demo mode
+    navigate('/profile');
   };
+
+  // Format address for display
+  const formatAddress = (address) => {
+    if (!address) return '';
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
+
+  // Listen for account changes
+  useEffect(() => {
+    if (window.ethereum) {
+      const handleAccountsChanged = (accounts) => {
+        if (accounts.length === 0) {
+          // User disconnected their wallet
+          console.log('User disconnected wallet from MetaMask');
+          dispatch(disconnectWallet());
+        } else if (accounts[0] !== userAddress && !manuallyDisconnected) {
+          // User switched accounts and hasn't manually disconnected
+          console.log('User switched accounts');
+          dispatch(initializeContract());
+        }
+      };
+
+      const handleChainChanged = () => {
+        // Reinitialize contract when chain changes instead of reloading
+        console.log('Chain changed, reinitializing contract...');
+        if (!manuallyDisconnected) {
+          dispatch(initializeContract());
+        }
+      };
+
+      window.ethereum.on('accountsChanged', handleAccountsChanged);
+      window.ethereum.on('chainChanged', handleChainChanged);
+
+      return () => {
+        window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+        window.ethereum.removeListener('chainChanged', handleChainChanged);
+      };
+    }
+  }, [dispatch, userAddress, manuallyDisconnected]);
 
   React.useEffect(() => {
     const handleClickOutside = (event) => {
@@ -66,12 +116,12 @@ export default function Header() {
             ))}
           </nav>
           <div className="flex items-center space-x-4">
-            {isConnected ? (
+            {isConnected && userAddress ? (
               <div className="relative" ref={profileRef}>
                 <button onClick={() => setIsProfileOpen(!isProfileOpen)} className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                  <img src={`https://avatar.vercel.sh/demo.png`} alt="Demo User" className="h-6 w-6 rounded-full" />
-                  <span className="hidden sm:inline text-sm font-medium text-gray-700">
-                    Demo User
+                  <img src={`https://avatar.vercel.sh/${userAddress}.png`} alt="User Avatar" className="h-6 w-6 rounded-full" />
+                  <span className="hidden sm:inline text-sm font-medium text-gray-700 font-mono">
+                    {formatAddress(userAddress)}
                   </span>
                   <ChevronDown className="h-4 w-4 text-gray-500" />
                 </button>
@@ -79,10 +129,6 @@ export default function Header() {
                   {isProfileOpen && (
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }} className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                       <div className="py-1">
-                        <button onClick={handleProfileClick} className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                          <User className="mr-3 h-4 w-4" />
-                          Profile
-                        </button>
                         <button onClick={handleDisconnect} className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                           <LogOut className="mr-3 h-4 w-4" />
                           Disconnect

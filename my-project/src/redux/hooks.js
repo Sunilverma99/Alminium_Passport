@@ -18,19 +18,6 @@ export const useOrganization = () => {
 };
 
 // Custom hooks for specific data
-export const useUserRoles = () => {
-  const contract = useContract();
-  return {
-    hasGovernmentRole: contract.roles?.government || false,
-    hasTenantAdminRole: contract.roles?.tenantAdmin || false,
-    hasManufacturerRole: contract.roles?.manufacturer || false,
-    hasSupplierRole: contract.roles?.supplier || false,
-    hasRecyclerRole: contract.roles?.recycler || false,
-    hasConsumerRole: contract.roles?.thirdParty || false,
-    hasMinerRole: contract.roles?.miner || false,
-  };
-};
-
 export const useUserAccount = () => {
   const contract = useContract();
   return {

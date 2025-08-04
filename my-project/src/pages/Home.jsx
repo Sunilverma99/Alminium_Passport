@@ -410,7 +410,7 @@ return (
 
           {/* Right Column - Battery Passport UI */}
           <div className="relative ">
-             <img src="Battery_passport.png" alt="Aluminium Passport Interface"  className="border-8 border-green-500 rounded-lg shadow-lg shadow-green-500/50"/>
+             <img src="Alminium_passport.png" alt="Aluminium Passport Interface"  className="border-8 border-green-500 rounded-lg shadow-lg shadow-green-500/50"/>
           </div>
         </div>
       </div>

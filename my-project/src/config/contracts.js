@@ -31,9 +31,9 @@ export const CONTRACT_CONFIG = {
 // Helper function to get contract address for current network
 export const getContractAddress = (contractName, networkId) => {
   const network = CONTRACT_CONFIG.networks[networkId];
-  if (network && network[contractName]) {
+  if (network && network[contractName] && network[contractName] !== '0x...') {
     return network[contractName];
   }
-  // Fallback to default address
-  return CONTRACT_CONFIG[contractName];
+  // Return null if no valid contract address is found for this network
+  return null;
 }; 

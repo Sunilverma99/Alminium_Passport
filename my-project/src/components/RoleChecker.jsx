@@ -1,91 +1,89 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { checkUserRoles, initializeContract, disconnectWallet, resetDisconnectFlag } from '../redux/contractSlice';
+import React, { useEffect, useState } from 'react';
+import { initializeContract, disconnectWallet, resetDisconnectFlag } from '../redux/contractSlice';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
-const RoleChecker = () => {
-  const dispatch = useDispatch();
-  const { userAddress, isConnected, isLoading, manuallyDisconnected } = useSelector((state) => state.contract);
-  const isDisconnected = !isConnected;
+export default function RoleChecker({ children }) {
+  const dispatch = useAppDispatch();
+  const { userAddress, isConnected, manuallyDisconnected } = useAppSelector(state => state.contract);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    const checkRoles = async () => {
-      if (!isDisconnected && userAddress) {
+    const initializeWallet = async () => {
+      if (!manuallyDisconnected && !isConnected && window.ethereum) {
         try {
-          await dispatch(checkUserRoles(userAddress)).unwrap();
+          const result = await dispatch(initializeContract()).unwrap();
+          console.log('Wallet initialized:', result.userAddress);
         } catch (error) {
-          console.error('Error checking user roles:', error);
+          console.error('Failed to initialize wallet:', error);
         }
       }
+      setIsInitialized(true);
     };
 
-    checkRoles();
-  }, [userAddress, isDisconnected, dispatch]);
+    initializeWallet();
+  }, [dispatch, isConnected, manuallyDisconnected]);
 
-  // Listen for account changes from MetaMask
   useEffect(() => {
+    if (!window.ethereum) return;
+
     const handleAccountsChanged = async (accounts) => {
       if (accounts.length === 0) {
-        // User disconnected
+        // User disconnected their wallet
         dispatch(disconnectWallet());
-        return;
-      }
-      
-      const newAccount = accounts[0];
-      if (newAccount !== userAddress) {
-        try {
-          await dispatch(checkUserRoles(newAccount)).unwrap();
-        } catch (error) {
-          console.error('Error checking user roles after account change:', error);
+      } else {
+        const newAccount = accounts[0];
+        if (newAccount !== userAddress) {
+          // User switched accounts
+          try {
+            await dispatch(initializeContract()).unwrap();
+            console.log('Account switched to:', newAccount);
+          } catch (error) {
+            console.error('Failed to switch account:', error);
+          }
         }
       }
     };
 
-    const handleChainChanged = async () => {
-      // Reload the page when chain changes
+    const handleChainChanged = () => {
+      // Reinitialize when chain changes
       window.location.reload();
     };
 
-    // Add event listeners for MetaMask events
-    if (window.ethereum) {
-      window.ethereum.on('accountsChanged', handleAccountsChanged);
-      window.ethereum.on('chainChanged', handleChainChanged);
-    }
+    window.ethereum.on('accountsChanged', handleAccountsChanged);
+    window.ethereum.on('chainChanged', handleChainChanged);
 
-    // Cleanup event listeners
     return () => {
-      if (window.ethereum) {
-        window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
-        window.ethereum.removeListener('chainChanged', handleChainChanged);
-      }
+      window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+      window.ethereum.removeListener('chainChanged', handleChainChanged);
     };
-  }, [userAddress, dispatch]);
+  }, [dispatch, userAddress]);
 
-  // Auto-connect on app load if user was previously connected
   useEffect(() => {
-    const autoConnect = async () => {
-      // Don't auto-connect if user manually disconnected
-      if (manuallyDisconnected) {
-        console.log('Skipping auto-connect due to manual disconnect');
-        return;
-      }
-      
-      if (window.ethereum && isDisconnected) {
-        try {
-          const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-          if (accounts.length > 0) {
+    if (!window.ethereum) return;
+
+    const checkConnection = async () => {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        if (accounts.length > 0 && !isConnected && !manuallyDisconnected) {
+          // User has accounts but not connected in our state, and hasn't manually disconnected
+          try {
             const result = await dispatch(initializeContract()).unwrap();
-            await dispatch(checkUserRoles(result.userAddress)).unwrap();
+            console.log('Reconnected wallet:', result.userAddress);
+          } catch (error) {
+            console.error('Failed to reconnect wallet:', error);
           }
-        } catch (error) {
-          console.error('Error auto-connecting:', error);
         }
+      } catch (error) {
+        console.error('Error checking connection:', error);
       }
     };
 
-    autoConnect();
-  }, [dispatch, isDisconnected, manuallyDisconnected]);
+    checkConnection();
+  }, [dispatch, isConnected, manuallyDisconnected]);
 
-  return null; // This component doesn't render anything
-};
+  if (!isInitialized) {
+    return <div>Loading...</div>;
+  }
 
-export default RoleChecker; 
+  return <>{children}</>;
+} 
