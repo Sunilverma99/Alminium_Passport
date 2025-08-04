@@ -428,9 +428,9 @@ return (
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-emerald-800 via-emerald-600 to-teal-600 bg-clip-text text-transparent sm:text-5xl">
+          <h2 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-800 via-blue-600 to-blue-700 bg-clip-text text-transparent sm:text-5xl">
             Benefits & Impact
-            <span className="block text-base font-medium tracking-normal text-emerald-700 mt-3">
+            <span className="block text-base font-medium tracking-normal text-blue-700 mt-3">
               Transforming the future of aluminium management
             </span>
           </h2>
@@ -443,23 +443,23 @@ return (
               className="group relative bg-white p-8 rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               {/* Decorative corner gradient */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Icon wrapper */}
               <div className="relative mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-200">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-200">
                   {React.createElement(benefit.icon, { className: "w-6 h-6" })}
                 </div>
-                <div className="absolute -bottom-3 -right-3 w-12 h-12 bg-emerald-50 rounded-xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute -bottom-3 -right-3 w-12 h-12 bg-blue-50 rounded-xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
               {/* Content */}
               <div className="relative">
-                <h3 className="text-xl font-semibold text-emerald-900 mb-4">{benefit.title}</h3>
+                <h3 className="text-xl font-semibold text-blue-900 mb-4">{benefit.title}</h3>
                 <ul className="space-y-3">
                   {benefit.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start gap-3 text-emerald-700">
-                      <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-emerald-600 to-teal-500 text-white flex items-center justify-center text-xs mt-0.5 shadow-sm shadow-emerald-200">
+                    <li key={itemIndex} className="flex items-start gap-3 text-blue-700">
+                      <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-blue-600 to-blue-500 text-white flex items-center justify-center text-xs mt-0.5 shadow-sm shadow-blue-200">
                         {itemIndex + 1}
                       </span>
                       <span className="text-sm">{item}</span>
@@ -469,19 +469,19 @@ return (
               </div>
 
               {/* Bottom decoration */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-600 to-teal-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-blue-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
             </div>
           ))}
         </div>
 
         <div className="relative mt-16 text-center">
-          <p className="max-w-3xl mx-auto text-emerald-700 text-lg italic">
+          <p className="max-w-3xl mx-auto text-blue-700 text-lg italic">
             Our aluminium passport system promotes sustainable practices while creating economic opportunities and
             environmental benefits across the entire aluminium lifecycle.
           </p>
           {/* Decorative elements */}
-          <div className="absolute top-1/2 left-0 w-32 h-px bg-gradient-to-r from-emerald-200 to-transparent" />
-          <div className="absolute top-1/2 right-0 w-32 h-px bg-gradient-to-l from-emerald-200 to-transparent" />
+          <div className="absolute top-1/2 left-0 w-32 h-px bg-gradient-to-r from-blue-200 to-transparent" />
+          <div className="absolute top-1/2 right-0 w-32 h-px bg-gradient-to-l from-blue-200 to-transparent" />
         </div>
       </div>
     </section>
@@ -500,7 +500,7 @@ return (
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-green-500   mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-blue-500 mb-6">
             Aluminium Passport Initiative
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
