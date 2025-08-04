@@ -56,7 +56,7 @@ export default function BatteryPassportResources() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-600 via-blue-600 to-purple-600">
-            Marklytics  Solutions
+            AEIFORO  Solutions
           </h1>
           <p className="text-xl text-gray-600">Empowering the Future of Sustainable Energy with Battery Passports</p>
         </motion.div>

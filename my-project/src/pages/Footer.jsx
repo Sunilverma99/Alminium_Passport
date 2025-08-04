@@ -5,7 +5,7 @@ function Footer() {
     // <div classNameName=" bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white z-0">
     //     <footer classNameName="bg-gray-900 py-3 border-t border-gray-500/20">
     //     <div classNameName="container mx-auto px-4 text-center">
-    //       <p classNameName="text-sm text-gray-400">© 2024 Marklytics. All Rights Reserved.</p>
+    //       <p classNameName="text-sm text-gray-400">© 2024 AEIFORO. All Rights Reserved.</p>
     //     </div>
     //   </footer>
     // </div>
@@ -16,7 +16,7 @@ function Footer() {
         {/* <div className="sm:flex sm:items-center sm:justify-between">
             <a href="https://flowbite.com/" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
                 <img src="./Logo.png" className="h-8" alt="Flowbite Logo" />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Marklytics</span>
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AEIFORO</span>
             </a>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li>
@@ -34,7 +34,7 @@ function Footer() {
             </ul>
         </div> */}
         <hr className=" border-gray-200 sm:mx-auto dark:border-gray-700 mb-4" />
-        <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 <a href="https://www.marklytics.co.uk/" className="hover:underline">Marklytics</a>. All Rights Reserved.</span>
+        <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 <a href="https://www.aeiforo.co.uk/" className="hover:underline">AEIFORO</a>. All Rights Reserved.</span>
     </div>
 </footer>
 

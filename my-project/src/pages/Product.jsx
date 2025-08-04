@@ -85,20 +85,20 @@ export default function ProductShowcase() {
       description: "Incorporate ESG metrics to measure and improve environmental impact, social responsibility, and governance standards.",
     },
     {
-      icon: "📊",
-      title: "Business Simulation Game",
-      description: "Utilize simulation tools to forecast outcomes, test strategies, and prepare for market dynamics.",
-    },
-    {
       icon: "🔗",
       title: "Digital Passport (DPP)",
       description: "Use DPP systems to track and verify the sourcing and movement of materials, ensuring ethical practices and regulatory compliance.",
+    },
+    {
+      icon: "🔧",
+      title: "Aluminum Passport",
+      description: "Comprehensive digital passport for aluminum products with CBAM/ESPR compliance, carbon footprint tracking, and supply chain transparency.",
     },
   ]
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

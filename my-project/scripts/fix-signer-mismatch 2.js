@@ -72,7 +72,7 @@ async function debugSignerMismatch() {
                 
                 // Try to find what the DID name should be
                 console.log('\n   Trying to reverse-engineer the DID name...');
-                const possibleOrgIds = ['mahindra', 'mahindra-01', 'mahindra01', 'marklytics'];
+                const possibleOrgIds = ['mahindra', 'mahindra-01', 'mahindra01', 'aeiforo'];
                 
                 for (const orgId of possibleOrgIds) {
                     const testDidName = `did:web:${orgId}.com#create-${transactionSender}`;
@@ -130,7 +130,7 @@ async function debugSignerMismatch() {
                 `cred-mahindra-${transactionSender}`,
                 `cred-mahindra-01-${transactionSender}`,
                 `cred-mahindra01-${transactionSender}`,
-                `cred-marklytics-${transactionSender}`
+                `cred-aeiforo-${transactionSender}`
             ];
             
             for (const credentialId of possibleCredentialIds) {

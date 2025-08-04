@@ -12,7 +12,7 @@ export default function CreateBatteryPassportBatch() {
     try {
       const passports = JSON.parse(jsonData);
       const { evContract, account, web3 } = await initializeContractInstance();
-      const didHash = web3.utils.keccak256(`did:web:marklytics.com#create-${account}`);
+      const didHash = web3.utils.keccak256(`did:web:aeiforo.co.uk#create-${account}`);
 
       const domain = {
         name: 'EVBatteryPassport',

@@ -24,7 +24,7 @@ export default function CheckDIDVerification() {
     if (!validateEthereumAddress(address)) return;
     setShowConfirmation(false);
     try {
-      const verificationStatus = await didManager.methods.isVerified(`did:web:marklytics.com#create-${address}`).call();
+      const verificationStatus = await didManager.methods.isVerified(`did:web:aeiforo.co.uk#create-${address}`).call();
       if (verificationStatus) {
         toast.success("DID is verified.");
         setIsVerified(true);

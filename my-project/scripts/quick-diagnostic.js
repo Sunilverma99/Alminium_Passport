@@ -71,7 +71,7 @@ async function quickDiagnostic() {
                 
                 // Try to find the correct DID name
                 console.log('\n   Trying to find the correct DID name...');
-                const possibleOrgIds = ['mahindra', 'mahindra-01', 'mahindra01', 'marklytics'];
+                const possibleOrgIds = ['mahindra', 'mahindra-01', 'mahindra01', 'aeiforo'];
                 
                 for (const orgId of possibleOrgIds) {
                     const testDidName = `did:web:${orgId}.com#create-${transactionSender}`;

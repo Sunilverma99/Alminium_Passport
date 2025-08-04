@@ -159,7 +159,7 @@ export default function CompanyDetails() {
           <path d="M12 8H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "Why Choose Marklytics?",
+      title: "Why Choose AEIFORO?",
       content: [
         "Proven expertise in fostering operational efficiency",
         "A client-focused approach tailored to diverse industry needs",
@@ -186,7 +186,7 @@ export default function CompanyDetails() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
-            Marklytics
+            AEIFORO
           </h1>
           <p className="text-xl text-gray-600">Revolutionizing Industries with Innovative Solutions</p>
         </motion.div>

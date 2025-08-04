@@ -872,7 +872,7 @@ const ManufacturerDashboard = () => {
 
 
         {/* Footer */}
-        <div className="mt-12 text-center text-sm text-gray-500">© 2025 Marklytics. All Rights Reserved.</div>
+        <div className="mt-12 text-center text-sm text-gray-500">© 2025 AEIFORO. All Rights Reserved.</div>
       </div>
     </div>
   )

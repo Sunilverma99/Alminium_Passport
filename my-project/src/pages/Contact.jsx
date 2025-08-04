@@ -44,7 +44,7 @@ export default function ContactUs() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
             Contact Us
           </h1>
-          <p className="text-xl text-gray-600">Get in touch with Marklytics for innovative solutions</p>
+          <p className="text-xl text-gray-600">Get in touch with ALtrail for innovative solutions</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -122,20 +122,23 @@ export default function ContactUs() {
               <div className="relative overflow-hidden rounded-2xl backdrop-blur-sm border border-gray-200 bg-white/80 shadow-lg p-6">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-900">Contact Information</h2>
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-4">
-                    <Mail className="text-blue-600 flex-shrink-0" />
+                  <div className="flex items-start space-x-4">
+                    <MapPin className="text-blue-600 flex-shrink-0 mt-1" />
                     <div className="flex flex-col text-gray-700">
-                      <span>info@marklytics.com</span>
-                      <span>vijay.s@marklytics.com</span>
+                      <span className="font-semibold">London, UK / Dubai, UAE / Chennai, India</span>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
-                    <Phone className="text-blue-600 flex-shrink-0" />
-                    <span className="text-gray-700">+44 7720216021</span>
+                    <Mail className="text-blue-600 flex-shrink-0" />
+                    <span className="text-gray-700">Info@aeiforo.co.uk</span>
                   </div>
-                  <div className="flex items-start space-x-4">
-                    <MapPin className="text-blue-600 flex-shrink-0 mt-1" />
-                    <span className="text-gray-700">Priory Street, HDTI Building, Coventry, England CV1 5FB, GB</span>
+                  <div className="flex items-center space-x-4">
+                    <Phone className="text-blue-600 flex-shrink-0" />
+                    <div className="flex flex-col text-gray-700">
+                      <span>UK: +44 7720216021</span>
+                      <span>UAE: +971 501632655</span>
+                      <span>INDIA: +91 9944752521</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -159,7 +162,7 @@ export default function ContactUs() {
                 <h2 className="text-2xl font-semibold mb-4 text-gray-900">Connect With Us</h2>
                 <p className="mb-6 text-gray-700">Follow us on social media for the latest updates and insights:</p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <a href="https://x.com/Marklyticsuk" className="flex flex-col items-center space-y-2 group">
+                  <a href="https://x.com/AEIFORO" className="flex flex-col items-center space-y-2 group">
                     <div className="p-3 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors duration-300">
                       <Twitter className="w-6 h-6 text-blue-600" />
                     </div>
@@ -168,7 +171,7 @@ export default function ContactUs() {
                     </span>
                   </a>
                   <a
-                    href="https://www.linkedin.com/company/marklytics"
+                    href="https://www.linkedin.com/company/aeiforo"
                     className="flex flex-col items-center space-y-2 group"
                   >
                     <div className="p-3 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors duration-300">
@@ -179,7 +182,7 @@ export default function ContactUs() {
                     </span>
                   </a>
                   <a
-                    href="https://www.facebook.com/MarklyticsUK"
+                    href="https://www.facebook.com/AEIFORO"
                     className="flex flex-col items-center space-y-2 group"
                   >
                     <div className="p-3 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors duration-300">
@@ -190,7 +193,7 @@ export default function ContactUs() {
                     </span>
                   </a>
                   <a
-                    href="https://www.instagram.com/marklytics.co.uk/"
+                    href="https://www.instagram.com/aeiforo.co.uk/"
                     className="flex flex-col items-center space-y-2 group"
                   >
                     <div className="p-3 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors duration-300">
